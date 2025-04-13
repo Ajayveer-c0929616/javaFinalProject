@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Film Explorer</title>
+    <link rel="stylesheet" th:href="@{/theme.css}" />
+</head>
+<body>
+<header>
+    <h1>Film Explorer</h1>
+    <form action="/search" method="get">
+        <input type="text" name="q" th:value="${searchTerm}" placeholder="Search films..." />
+        <button type="submit">Go</button>
+    </form>
+    <nav>
+        <a href="/fav/list">Favorites</a>
+    </nav>
+</header>
+
+<section class="grid">
+    <div class="card" th:each="film : ${collection}">
+        <a th:href="@{'/film/' + ${film.id}}">
+            <img th:src="'https://image.tmdb.org/t/p/w200' + ${film.cover}" th:alt="${film.title}" />
+            <h3 th:text="${film.title}">Film Title</h3>
+        </a>
+    </div>
+</section>
+</body>
+</html>
